@@ -38,15 +38,8 @@ namespace PdfTools
                 Console.WriteLine(arg);
             }
 
-            if (args.Length == 0)
-                throw new ArgumentException("at least an action is required");
-
             var action = args[0];
-
-
-
-            // ==============
-            IAction myAction = null;
+            IAction myAction = new EmptyAction();
 
             // markdown-in, pdf-out
             if (string.Equals(action, "create", StringComparison.CurrentCultureIgnoreCase))
@@ -75,6 +68,8 @@ namespace PdfTools
             {
                 myAction = new CombineAction();
             }
+
+            DoMain(myAction, args);
 
 #if DEBUG
             Console.ReadKey();

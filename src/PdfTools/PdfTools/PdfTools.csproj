@@ -142,6 +142,7 @@
     <Compile Include="Actions\CreateAction.cs" />
     <Compile Include="Actions\CombineAction.cs" />
     <Compile Include="Actions\DownloadAction.cs" />
+    <Compile Include="Actions\EmptyAction.cs" />
     <Compile Include="Actions\IAction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
