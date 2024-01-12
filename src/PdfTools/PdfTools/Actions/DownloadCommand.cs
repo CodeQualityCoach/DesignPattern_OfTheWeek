@@ -1,11 +1,12 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net.Http;
 
 namespace PdfTools.Actions
 {
-    class DownloadAction : IAction
+    class DownloadCommand : ICommand
     {
-        public void Do(string[] args)
+        public void Execute(string[] args)
         {
             var client = new HttpClient();
             var response = client.GetAsync(args[1]).Result;
@@ -14,9 +15,10 @@ namespace PdfTools.Actions
             File.WriteAllBytes(args[2], pdf);
         }
 
-        public void GetHelp()
+        public bool CanExecute(string[] context)
         {
-            throw new System.NotImplementedException();
+            var action = context[0];
+            return string.Equals(action, "download", StringComparison.CurrentCultureIgnoreCase);
         }
     }
 }

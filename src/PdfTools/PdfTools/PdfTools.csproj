@@ -137,12 +137,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actions\AddCodeAction.cs" />
-    <Compile Include="Actions\ArchiveAction.cs" />
-    <Compile Include="Actions\CreateAction.cs" />
-    <Compile Include="Actions\CombineAction.cs" />
-    <Compile Include="Actions\DownloadAction.cs" />
-    <Compile Include="Actions\IAction.cs" />
+    <Compile Include="Actions\AddCodeCommand.cs" />
+    <Compile Include="Actions\ArchiveCommand.cs" />
+    <Compile Include="Actions\CreateCommand.cs" />
+    <Compile Include="Actions\CombineCommand.cs" />
+    <Compile Include="Actions\DownloadCommand.cs" />
+    <Compile Include="Actions\ICommand.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

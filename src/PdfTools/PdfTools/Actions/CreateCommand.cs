@@ -6,9 +6,9 @@ using FSharp.Markdown;
 
 namespace PdfTools.Actions
 {
-    internal class CreateAction : IAction
+    internal class CreateCommand : ICommand
     {
-        public void Do(string[] args)
+        public void Execute(string[] args)
         {
             DoCreate(args.Skip(1).ToArray());
         }
@@ -28,10 +28,10 @@ namespace PdfTools.Actions
 
             MarkdownPdf.Write(mdDoc, outFile);
         }
-
-        public void GetHelp()
+        public bool CanExecute(string[] context)
         {
-            throw new NotImplementedException();
+            var action = context[0];
+            return string.Equals(action, "create", StringComparison.CurrentCultureIgnoreCase);
         }
     }
 }

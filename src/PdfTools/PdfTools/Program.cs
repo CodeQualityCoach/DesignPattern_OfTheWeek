@@ -1,12 +1,10 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
-using FSharp.Markdown;
-using FSharp.Markdown.Pdf;
-using iTextSharp.text;
 using iTextSharp.text.pdf;
 using NLog;
 using PdfTools.Actions;
@@ -39,55 +37,37 @@ namespace PdfTools
             }
 
             if (args.Length == 0)
-                throw new ArgumentException("at least an action is required");
+                throw new ArgumentException("at least an command is required");
 
             var action = args[0];
 
 
 
             // ==============
-            IAction myAction = null;
+            IList<ICommand> myCommand = new List<ICommand>();
 
-            // markdown-in, pdf-out
-            if (string.Equals(action, "create", StringComparison.CurrentCultureIgnoreCase))
-                myAction = new CreateAction();
+            myCommand.Add(new CreateCommand());
+            myCommand.Add(new AddCodeCommand());
+            myCommand.Add(new ArchiveCommand());
+            myCommand.Add(new CombineCommand());
+            myCommand.Add(new DownloadCommand());
+            myCommand.Add(new LogArgs());
 
-            // pdf-in, qrcodetext, optional outfile
-            if (string.Equals(action, "addcode", StringComparison.CurrentCultureIgnoreCase))
-            {
-                myAction = new AddCodeAction();
-            }
-
-            // url, outfile
-            if (string.Equals(action, "download", StringComparison.CurrentCultureIgnoreCase))
-            {
-                myAction = new DownloadAction();
-            }
-
-            // url, outfile
-            if (string.Equals(action, "archive", StringComparison.CurrentCultureIgnoreCase))
-            {
-                myAction = new ArchiveAction();
-            }
-
-            // url, outfile
-            if (string.Equals(action, "combine", StringComparison.CurrentCultureIgnoreCase))
-            {
-                myAction = new CombineAction();
-            }
+            DoMain(myCommand, args);
 
 #if DEBUG
             Console.ReadKey();
 #endif
         }
 
-        public static void DoMain(IAction action, string[] args)
+        public static void DoMain(IEnumerable<ICommand> commands, string[] args)
         {
-            if (args.Length < 2) { action.GetHelp(); }
-
-            action.Do(args);
+            foreach (var command in commands)
+            {
+                if (!command.CanExecute(args)) continue;
+                command.Execute(args);
+            }
         }
-
     }
 
 

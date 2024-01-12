@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using Castle.Core.Logging;
 using iTextSharp.text;
@@ -6,17 +7,19 @@ using iTextSharp.text.pdf;
 
 namespace PdfTools.Actions
 {
-    class CombineAction : IAction
+    class CombineCommand : ICommand
     {
-        public void Do(string[] args)
+        public void Execute(string[] args)
         {
             CombineMultiplePDF(args.Skip(2).ToArray(), args[1]);
         }
 
-        public void GetHelp()
+        public bool CanExecute(string[] context)
         {
-            throw new System.NotImplementedException();
+            var action = context[0];
+            return string.Equals(action, "combine", StringComparison.CurrentCultureIgnoreCase);
         }
+
 
         private static void CombineMultiplePDF(string[] fileNames, string outFile)
         {
