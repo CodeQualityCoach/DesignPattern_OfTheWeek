@@ -97,11 +97,14 @@ namespace PdfTools
     public class PdfArchiver
     {
         private readonly string _tempFile;
+        private readonly ICodeGenerator _codeGenerator;
 
-        public PdfArchiver()
+        public PdfArchiver(ICodeGenerator codeGenerator = null)
         {
             _tempFile = Path.GetTempFileName();
+            _codeGenerator = codeGenerator ?? new QrCodeGenerator();
         }
+
         public void Archive(string url)
         {
             var client = new HttpClient();
@@ -115,7 +118,7 @@ namespace PdfTools
             using (Stream inputImageStream = new MemoryStream())
             using (Stream outputPdfStream = new FileStream(_tempFile, FileMode.Create, FileAccess.Write, FileShare.None))
             {
-                var code = CreateInitCode(url);
+                var code = _codeGenerator.CreateInitCode(url);
                 code.Save(inputImageStream, ImageFormat.Jpeg);
                 inputImageStream.Position = 0;
 
@@ -130,18 +133,26 @@ namespace PdfTools
             }
         }
 
-        private Bitmap CreateInitCode(string text)
+        public void SaveAs(string destFile)
+        {
+            File.Copy(_tempFile, destFile, true);
+        }
+    }
+
+    public interface ICodeGenerator
+    {
+        Bitmap CreateInitCode(string text);
+    }
+
+    public class QrCodeGenerator : ICodeGenerator
+    {
+        public Bitmap CreateInitCode(string text)
         {
             var qrCodeGenerator = new QRCodeGenerator();
             var qrCodeData = qrCodeGenerator.CreateQrCode(new PayloadGenerator.Url(text), QRCodeGenerator.ECCLevel.Q);
             var qrCode = new QRCode(qrCodeData);
 
             return qrCode.GetGraphic(2);
-        }
-
-        public void SaveAs(string destFile)
-        {
-            File.Copy(_tempFile, destFile, true);
         }
     }
 
