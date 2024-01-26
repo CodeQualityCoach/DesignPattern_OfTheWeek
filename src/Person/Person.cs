@@ -8,8 +8,9 @@
      * Interface Segregation Principle (ISP)
      ********************************************************/
 
+    //interface IEntity
 
-    public class Person
+    public class Person : IPerson, IXMlStringBuilder, IJsonStringBuilder, IStore, IHrElement
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -38,5 +39,15 @@
             var xmlString = "...";
             return xmlString;
         }
+
+        public string GetName()
+        {
+            return FirstName + " " + LastName;
+        }
+    }
+
+    public interface IHrElement
+    {
+        string GetName();
     }
 }
