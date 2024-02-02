@@ -1,6 +1,6 @@
 ﻿namespace Person
 {
-    interface IJsonStringBuilder
+    public interface ICanJsonSerialisation
     {
         string ToJsonString();
     }

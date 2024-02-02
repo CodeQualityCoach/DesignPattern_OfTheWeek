@@ -1,18 +1,25 @@
-﻿namespace Person
+﻿using System;
+
+namespace Person
 {
     /********************************************************
      * Aufgabe:
      * 
-     * In welche Schnittstellen könnte man die Klasse "Person"
-     * schneiden. Überlegt euch Schnittstellen im Sinne des
-     * Interface Segregation Principle (ISP)
+     * Factory Method implementieren
+     * Business Rule: Geburtsdatum hinzufügen. Darf nicht in der Zukunft liegen
      ********************************************************/
 
-    //interface IEntity
 
-    public class Person : IPerson, IXMlStringBuilder, IJsonStringBuilder, IStore, IHrElement
+    public class Person : IEntity, IPerson, IPersister, ICanJsonSerialisation, ICanXmlSerialisation
     {
-        public int Id { get; set; }
+        public Person(string firstName, string lastName)
+        {
+            FirstName = firstName ?? throw new ArgumentNullException(nameof(firstName));
+            LastName = lastName ?? throw new ArgumentNullException(nameof(lastName));
+            Id = Guid.NewGuid();
+        }
+
+        public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
@@ -39,15 +46,5 @@
             var xmlString = "...";
             return xmlString;
         }
-
-        public string GetName()
-        {
-            return FirstName + " " + LastName;
-        }
-    }
-
-    public interface IHrElement
-    {
-        string GetName();
     }
 }

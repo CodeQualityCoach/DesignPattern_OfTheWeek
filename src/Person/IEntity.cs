@@ -1,7 +1,9 @@
-﻿namespace Person
+﻿using System;
+
+namespace Person
 {
-    interface IEntity
+    public interface IEntity
     {
-        int Id { get; set; }
+        Guid Id { get; set; }
     }
 }

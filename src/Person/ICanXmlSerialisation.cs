@@ -1,6 +1,6 @@
 ﻿namespace Person
 {
-    interface IXMlStringBuilder
+    public interface ICanXmlSerialisation
     {
         string ToXmlString();
     }

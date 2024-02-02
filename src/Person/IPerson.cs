@@ -1,6 +1,6 @@
 ﻿namespace Person
 {
-    interface IPerson : IEntity
+    public interface IPerson : IEntity
     {
         string FirstName { get; set; }
         string LastName { get; set; }
