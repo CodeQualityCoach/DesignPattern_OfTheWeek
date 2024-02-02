@@ -23,6 +23,14 @@ namespace Person
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
+
+
+
+
+
+
+        #region for later pattern use
+
         public void Load(string path)
         {
             // Lesen der Daten aus der Datei...
@@ -46,5 +54,7 @@ namespace Person
             var xmlString = "...";
             return xmlString;
         }
+
+        #endregion
     }
 }
