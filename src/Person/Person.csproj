@@ -48,6 +48,7 @@
     <Compile Include="IEntity.cs" />
     <Compile Include="IPersister.cs" />
     <Compile Include="IPerson.cs" />
+    <Compile Include="DDDPerson.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
