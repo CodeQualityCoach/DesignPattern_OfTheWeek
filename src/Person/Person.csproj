@@ -45,11 +45,10 @@
     <Compile Include="Builder\Team.cs" />
     <Compile Include="ICanJsonSerialisation.cs" />
     <Compile Include="ICanXmlSerialisation.cs" />
-    <Compile Include="IEntity.cs" />
     <Compile Include="IPersister.cs" />
-    <Compile Include="IPerson.cs" />
-    <Compile Include="DDDPerson.cs" />
+    <Compile Include="DDD\DDDPerson.cs" />
     <Compile Include="Person.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

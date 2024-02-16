@@ -2,15 +2,7 @@
 
 namespace Person
 {
-    /********************************************************
-     * Aufgabe:
-     * 
-     * Factory Method implementieren
-     * Business Rule: Geburtsdatum hinzufügen. Darf nicht in der Zukunft liegen
-     ********************************************************/
-
-
-    public class Person : IPerson, IPersister, ICanJsonSerialisation, ICanXmlSerialisation
+    public class Person : IPersister, ICanJsonSerialisation, ICanXmlSerialisation
     {
         private Person(Guid uuid, string firstName, string lastName, DateTime birthday)
         {
@@ -25,6 +17,7 @@ namespace Person
         public string LastName { get; set; }
         public DateTime Birthday { get; }
 
+        // "wrong factory"
         public static Person Create(Guid uuid, string firstName, string lastName, DateTime birthday)
         {
             if (firstName == null) throw new ArgumentNullException();
@@ -33,8 +26,6 @@ namespace Person
 
             return new Person(uuid, firstName, lastName, birthday);
         }
-
-
 
 
 
