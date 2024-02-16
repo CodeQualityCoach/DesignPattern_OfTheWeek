@@ -9,22 +9,6 @@ namespace Person
      * Business Rule: Geburtsdatum hinzufügen. Darf nicht in der Zukunft liegen
      ********************************************************/
 
-    public class PersonId
-    {
-        public static implicit operator PersonId(Guid value) => new PersonId(value);
-
-        public Guid Value { get; }
-
-        public PersonId(Guid uuid)
-        {
-            Value = uuid;
-        }
-        public PersonId()
-        {
-            Value = Guid.NewGuid();
-        }
-    }
-
     public class DDDPerson
     {
         private DDDPerson(PersonId uuid, string firstName, string lastName, DateTime birthday)
@@ -49,37 +33,5 @@ namespace Person
             //return new DDDPerson(new PersonId(uuid), firstName, lastName, birthday);
             return new DDDPerson(uuid, firstName, lastName, birthday);
         }
-
-
-
-
-
-        #region for later pattern use
-
-        public void Load(string path)
-        {
-            // Lesen der Daten aus der Datei...
-        }
-
-        public void Save(string path)
-        {
-            // Speichern der Daten in die Datei...
-        }
-
-        public string ToJsonString()
-        {
-            // Zurückliefern der Daten als JSON-Zeichenkette...
-            var jsonString = "...";
-            return jsonString;
-        }
-
-        public string ToXmlString()
-        {
-            // Zurückliefern der Daten als XML-Zeichenkette...
-            var xmlString = "...";
-            return xmlString;
-        }
-
-        #endregion
     }
 }

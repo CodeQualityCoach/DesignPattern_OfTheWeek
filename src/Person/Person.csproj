@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Builder\OfficeSetup.cs" />
     <Compile Include="Builder\Team.cs" />
+    <Compile Include="DDD\PersonId.cs" />
     <Compile Include="ICanJsonSerialisation.cs" />
     <Compile Include="ICanXmlSerialisation.cs" />
     <Compile Include="IPersister.cs" />
