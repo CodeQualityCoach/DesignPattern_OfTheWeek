@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Person.Builder
+﻿namespace Person.Builder
 {
     internal class Team
     {
-        public IPerson Boss { get; }
-        public IPerson[] Member { get; }
+        public Person Boss { get; }
+        public Person[] Member { get; }
         public bool WorksAtCustomerSite { get; }
         public bool AllowHomeOffice { get; }
 
-        public Team(IPerson boss, IPerson[] member, bool worksAtCustomerSite, bool allowHomeOffice)
+        public Team(Person boss, Person[] member, bool worksAtCustomerSite, bool allowHomeOffice)
         {
             Boss = boss;
             Member = member;
@@ -21,4 +15,16 @@ namespace Person.Builder
             AllowHomeOffice = allowHomeOffice;
         }
     }
+
+    // Aufgabe 1:
+    // --------------------------------
+    // implement the builder pattern for class Team
+    // Methods “AddMember”, “AssignBoss”, “AllowHomeOffice”, “WorksAtCustomerSite” 
+    internal class TeamBuilder
+    {
+        public Team Build()
+        {
+            throw new System.NotImplementedException();
+        }
+    }   
 }
