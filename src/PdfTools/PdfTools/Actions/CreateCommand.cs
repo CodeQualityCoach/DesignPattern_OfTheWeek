@@ -28,6 +28,7 @@ namespace PdfTools.Actions
 
             MarkdownPdf.Write(mdDoc, outFile);
         }
+
         public bool CanExecute(string[] context)
         {
             var action = context[0];

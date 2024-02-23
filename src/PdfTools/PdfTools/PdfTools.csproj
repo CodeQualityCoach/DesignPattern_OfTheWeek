@@ -143,6 +143,8 @@
     <Compile Include="Actions\CombineCommand.cs" />
     <Compile Include="Actions\DownloadCommand.cs" />
     <Compile Include="Actions\ICommand.cs" />
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\EmptyLogger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
