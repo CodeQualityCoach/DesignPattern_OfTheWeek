@@ -142,7 +142,9 @@
     <Compile Include="Actions\CreateCommand.cs" />
     <Compile Include="Actions\CombineCommand.cs" />
     <Compile Include="Actions\DownloadCommand.cs" />
+    <Compile Include="Actions\EmptyDecoratorCommand.cs" />
     <Compile Include="Actions\ICommand.cs" />
+    <Compile Include="Actions\LoggingDecorator.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\EmptyLogger.cs" />
     <Compile Include="Program.cs" />

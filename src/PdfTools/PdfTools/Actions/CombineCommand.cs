@@ -9,9 +9,9 @@ namespace PdfTools.Actions
 {
     class CombineCommand : ICommand
     {
-        public void Execute(string[] args)
+        public void Execute(string[] context)
         {
-            CombineMultiplePDF(args.Skip(2).ToArray(), args[1]);
+            CombineMultiplePDF(context.Skip(2).ToArray(), context[1]);
         }
 
         public bool CanExecute(string[] context)

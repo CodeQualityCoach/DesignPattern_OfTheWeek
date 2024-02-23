@@ -8,6 +8,7 @@ using System.Net.Http;
 using iTextSharp.text.pdf;
 using NLog;
 using PdfTools.Actions;
+using PdfTools.Logging;
 using QRCoder;
 using Image = iTextSharp.text.Image;
 
@@ -40,13 +41,11 @@ namespace PdfTools
                 throw new ArgumentException("at least an command is required");
 
             var action = args[0];
-
-
-
+            
             // ==============
             IList<ICommand> myCommand = new List<ICommand>();
 
-            myCommand.Add(new CreateCommand());
+            myCommand.Add(new LoggingDecoratorCommand( new CreateCommand(), new EmptyLogger()));
             myCommand.Add(new AddCodeCommand());
             myCommand.Add(new ArchiveCommand());
             myCommand.Add(new CombineCommand());
