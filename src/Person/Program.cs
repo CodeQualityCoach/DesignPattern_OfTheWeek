@@ -9,15 +9,26 @@ namespace Person
         {
             var p = Person.Create(Guid.NewGuid(), "Thomas", "Ley", new DateTime(1980, 2, 20));
 
+            var tb = new TeamHrBuilder();
+            var ob = new OfficeSetupHrBuilder();
 
-            var b = new TeamBuilder();
+            var d = new BuildSetupDirector();
+            d.CreateCustomerTeam(tb);
+            d.CreateCustomerTeam(ob);
 
-            b.AssignBoss(p);
-            b.AddMember(p);
-            b.AddMember(p);
-            b.WorksAtCustomerSite();
+            var t = tb.Build();
+            var o = ob.Build();
 
-            var t = b.Build();
+
+
+            var teamB = new AwesomeTeamBuilder()
+                .AssignBoss(p)
+                .AddMember(p)
+                .AddMember(p)
+                .AddMember(p)
+                .AddMember(p)
+                .AllowHomeOffice()
+                .Build();
         }
     }
 }

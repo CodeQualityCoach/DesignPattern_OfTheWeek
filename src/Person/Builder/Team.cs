@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using Person.Builder;
+using System.Linq;
 
 namespace Person.Builder
 {
@@ -20,9 +21,9 @@ namespace Person.Builder
 
     // Aufgabe 1:
     // --------------------------------
-    // implement the builder pattern for class Team
+    // implement the hrBuilder pattern for class Team
     // Methods “AddMember”, “AssignBoss”, “AllowHomeOffice”, “WorksAtCustomerSite” 
-    internal class TeamBuilder
+    internal class TeamHrBuilder : IHrBuilder
     {
         private Person _boss;
         private Person[] _member;
@@ -31,6 +32,7 @@ namespace Person.Builder
 
         public void AddMember(Person member)
         {
+            if (_member is null) _member = new Person[0];
             _member = _member.Append(member).ToArray();
         }
 
