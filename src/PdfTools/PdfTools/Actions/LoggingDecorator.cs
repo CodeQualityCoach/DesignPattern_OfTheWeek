@@ -3,28 +3,28 @@ using PdfTools.Logging;
 
 namespace PdfTools.Actions
 {
-    public class LoggingDecoratorCommand : ICommand
+    public class LoggingDecorator : ICommand
     {
         private readonly ICommand _command;
-        private readonly ILogger _logger;
+        private readonly IPdfToolsLogger _pdfToolsLogger;
 
-        public LoggingDecoratorCommand(ICommand command, ILogger logger)
+        public LoggingDecorator(ICommand command, IPdfToolsLogger pdfToolsLogger)
         {
             _command = command;
-            _logger = logger;
+            _pdfToolsLogger = pdfToolsLogger;
         }
 
         public void Execute(string[] args)
         {
-            _logger.Debug($"Executing command: {_command.GetType().Name} with args {string.Join(",", args)}");
-
             try
             {
+                _pdfToolsLogger.Debug($"Executing command {_command.GetType().Name}");
                 _command.Execute(args);
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "An error occurred");
+                _pdfToolsLogger.Error(ex, $"Error executing command {_command.GetType().Name}");
+                throw;
             }
         }
 

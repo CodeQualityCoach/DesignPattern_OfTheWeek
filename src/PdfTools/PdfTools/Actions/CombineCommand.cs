@@ -23,7 +23,7 @@ namespace PdfTools.Actions
 
         private static void CombineMultiplePDF(string[] fileNames, string outFile)
         {
-            // todo TLey: _logger.Trace($"Combile multiple pdf files {string.Join(",", fileNames)} into {outFile}");
+            // todo TLey: _pdfToolsLogger.Trace($"Combile multiple pdf files {string.Join(",", fileNames)} into {outFile}");
 
             // step 1: creation of a document-object
             Document document = new Document();

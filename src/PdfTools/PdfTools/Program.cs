@@ -6,9 +6,9 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Net.Http;
 using iTextSharp.text.pdf;
-using NLog;
 using PdfTools.Actions;
 using PdfTools.Logging;
+using PdfTools.Logging.NLog;
 using QRCoder;
 using Image = iTextSharp.text.Image;
 
@@ -16,11 +16,11 @@ namespace PdfTools
 {
     public class Program
     {
-        private static Logger _logger;
+        private static IPdfToolsLogger _logger;
 
         public static void Main(string[] args)
         {
-            _logger = NLog.LogManager.GetCurrentClassLogger();
+            _logger = new LoggerFactory().CreateLogger(typeof(Program));
 
 #if DEBUG
             // just a hack in case you hit play in VS
@@ -41,11 +41,11 @@ namespace PdfTools
                 throw new ArgumentException("at least an command is required");
 
             var action = args[0];
-            
+
             // ==============
             IList<ICommand> myCommand = new List<ICommand>();
 
-            myCommand.Add(new LoggingDecoratorCommand( new CreateCommand(), new EmptyLogger()));
+            myCommand.Add(new EmptyDecoratorCommand(new LoggingDecorator(new CreateCommand(), _logger)));
             myCommand.Add(new AddCodeCommand());
             myCommand.Add(new ArchiveCommand());
             myCommand.Add(new CombineCommand());

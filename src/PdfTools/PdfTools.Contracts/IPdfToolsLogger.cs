@@ -2,7 +2,7 @@
 
 namespace PdfTools.Logging
 {
-    public interface ILogger
+    public interface IPdfToolsLogger
     {
         void Debug(string message);
         //void Info(string message);

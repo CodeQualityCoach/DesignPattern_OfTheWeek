@@ -18,7 +18,7 @@ namespace PdfTools.Actions
             if (args.Length != 2)
                 throw new ArgumentException("at least in and out parameter is required");
 
-            //_logger.Trace("Creating pdf for a markdown file");
+            //_pdfToolsLogger.Trace("Creating pdf for a markdown file");
 
             var inFile = args[0];
             var outFile = args[1];
