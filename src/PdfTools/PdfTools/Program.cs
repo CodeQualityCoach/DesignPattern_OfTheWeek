@@ -95,20 +95,20 @@ namespace PdfTools
 
     public class PdfArchiver
     {
+        private readonly IHttpClient _httpClient;
         private readonly string _tempFile;
         private readonly ICodeGenerator _codeGenerator;
 
-        public PdfArchiver(ICodeGenerator codeGenerator = null)
+        public PdfArchiver(ICodeGenerator codeGenerator = null, IHttpClient httpClient = null)
         {
+            _httpClient = httpClient ?? new HttpClientFacade();
             _tempFile = Path.GetTempFileName();
             _codeGenerator = codeGenerator ?? new QrCodeGenerator();
         }
 
         public void Archive(string url)
         {
-            var client = new HttpClient();
-            var response = client.GetAsync(url).Result;
-            var pdf = response.Content.ReadAsByteArrayAsync().Result;
+            var pdf = _httpClient.GetPdfAsByteArray(url);
 
             var tmpTempFile = Path.GetTempFileName();
             File.WriteAllBytes(tmpTempFile, pdf);

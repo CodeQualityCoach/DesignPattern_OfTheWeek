@@ -1,16 +1,19 @@
 ﻿using System;
 using System.IO;
-using System.Net.Http;
 
 namespace PdfTools.Actions
 {
     class DownloadCommand : ICommand
     {
+        private readonly IHttpClient _httpClient;
+
+        public DownloadCommand(IHttpClient httpClient = null)
+        {
+            _httpClient = httpClient ?? new HttpClientFacade(); // zer impact injection pattern
+        }
         public void Execute(string[] args)
         {
-            var client = new HttpClient();
-            var response = client.GetAsync(args[1]).Result;
-            var pdf = response.Content.ReadAsByteArrayAsync().Result;
+            var pdf = _httpClient.GetPdfAsByteArray(args[1]);
 
             File.WriteAllBytes(args[2], pdf);
         }
