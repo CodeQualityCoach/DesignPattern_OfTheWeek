@@ -1,4 +1,5 @@
 ﻿using System;
+using Person.Element;
 
 namespace Person
 {
@@ -6,10 +7,10 @@ namespace Person
     {
         public static void Main(string[] args)
         {
-            var p1 = new Person(Guid.NewGuid(), "Thomas 1", "Ley", new DateTime(1980, 2, 20));
-            var p2 = new Person(Guid.NewGuid(), "Thomas 2", "Ley", new DateTime(1980, 2, 20));
-            var p3 = new Person(Guid.NewGuid(), "Thomas 3", "Ley", new DateTime(1980, 2, 20));
-            var p4 = new Person(Guid.NewGuid(), "Thomas 4", "Ley", new DateTime(1980, 2, 20));
+            var p1 = new Element.Person(Guid.NewGuid(), "Thomas 1", "Ley", new DateTime(1980, 2, 20));
+            var p2 = new Element.Person(Guid.NewGuid(), "Thomas 2", "Ley", new DateTime(1980, 2, 20));
+            var p3 = new Element.Person(Guid.NewGuid(), "Thomas 3", "Ley", new DateTime(1980, 2, 20));
+            var p4 = new Element.Person(Guid.NewGuid(), "Thomas 4", "Ley", new DateTime(1980, 2, 20));
 
             var a1 = new Abteilung
             {

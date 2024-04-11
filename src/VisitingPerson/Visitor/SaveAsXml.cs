@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Person
+namespace Person.Visitor
 {
     public class SaveAsXml
     {

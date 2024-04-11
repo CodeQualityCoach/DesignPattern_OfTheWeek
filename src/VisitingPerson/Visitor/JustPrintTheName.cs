@@ -1,12 +1,13 @@
 ﻿using System;
+using Person.Element;
 
-namespace Person
+namespace Person.Visitor
 {
     public class JustPrintTheName
     {
-        public void Save(object theElement)
+        public void Save(IOrgElement theElement)
         {
-            Console.Write(theElement);
+            Console.Write(theElement.Name);
         }
     }
 }
