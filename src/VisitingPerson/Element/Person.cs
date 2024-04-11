@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Person
+namespace Person.Element
 {
     public class Person : IOrgElement
     {

@@ -1,4 +1,4 @@
-﻿namespace Person
+﻿namespace Person.Element
 {
     public class Abteilung : IOrgElement
     {
