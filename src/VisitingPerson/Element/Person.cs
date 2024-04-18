@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Person.Visitor;
 
 namespace Person.Element
 {
@@ -20,6 +22,12 @@ namespace Person.Element
         public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string Name { get; set; }
+
+        public void Accept(IVisitor visitor)
+        {
+           visitor.Do(this);
+        }
+
         public DateTime Birthday { get; }
     }
 }

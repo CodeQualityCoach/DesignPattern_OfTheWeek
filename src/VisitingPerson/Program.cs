@@ -17,12 +17,22 @@ namespace Person
                 Name = "Abteilung 1",
                 OrgElements = new IOrgElement[] { p1, p2 }
             };
-            var a2 = new Abteilung
+
+            IOrgElement a2 = new Abteilung
             {
                 Name = "Abteilung 2",
                 OrgElements = new IOrgElement[] { a1, p3, p4 }
             };
 
+
+            //var v = new Visitor.JustPrintTheNameVisitor();
+
+            var v = new Visitor.SaveAsXml();
+            //v.Do(a2);
+
+            a2.Accept(v);
+
+            Console.ReadKey();
         }
     }
 }

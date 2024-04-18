@@ -3,11 +3,21 @@ using Person.Element;
 
 namespace Person.Visitor
 {
-    public class JustPrintTheName
+    public class JustPrintTheNameVisitor : IVisitor
     {
-        public void Save(IOrgElement theElement)
+        public void Do(IOrgElement element)
         {
-            Console.Write(theElement.Name);
+            Console.WriteLine(element.Name);
+        }
+
+        public void Do(Abteilung element)
+        {
+            Do((IOrgElement)element);
+        }
+
+        public void Do(Element.Person element)
+        {
+            Do((IOrgElement)element);
         }
     }
 }
