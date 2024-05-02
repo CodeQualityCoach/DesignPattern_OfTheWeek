@@ -145,6 +145,7 @@
     <Compile Include="Actions\IHttpClient.cs" />
     <Compile Include="Actions\LoggingDecorator.cs" />
     <Compile Include="Logging\EmptyLogger.cs" />
+    <Compile Include="Observer\Class1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -177,9 +178,7 @@
       <Name>PdfTools.Logging.NLog</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Observer\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

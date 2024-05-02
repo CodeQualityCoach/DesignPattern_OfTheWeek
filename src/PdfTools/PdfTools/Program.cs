@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Net.Http;
 using iTextSharp.text.pdf;
 using PdfTools.Actions;
 using PdfTools.Logging;
 using PdfTools.Logging.NLog;
+using PdfTools.Observer;
 using QRCoder;
 using Image = iTextSharp.text.Image;
 
@@ -44,12 +44,16 @@ namespace PdfTools
 
             var action = args[0];
 
+            var subject = new FileCreatedSubject();
+            _ = new FileListObserver(subject);
+            _ = new FileSizeCounter(subject);
+
             // ==============
             IList<ICommand> myCommand = new List<ICommand>();
 
             myCommand.Add(new EmptyDecoratorCommand(new LoggingDecorator(new CreateCommand(), _logger)));
             myCommand.Add(new AddCodeCommand());
-            myCommand.Add(new ArchiveCommand());
+            myCommand.Add(new ArchiveCommand(subject));
             myCommand.Add(new CombineCommand());
             myCommand.Add(new DownloadCommand());
             myCommand.Add(new LogArgs());
@@ -97,14 +101,17 @@ namespace PdfTools
 
     public class PdfArchiver
     {
+        private readonly FileCreatedSubject _subject;
         private readonly IHttpClient _httpClient;
         private readonly string _tempFile;
         private readonly ICodeGenerator _codeGenerator;
 
-        public PdfArchiver(ICodeGenerator codeGenerator = null, IHttpClient httpClient = null)
+        public PdfArchiver(ICodeGenerator codeGenerator = null, IHttpClient httpClient = null, FileCreatedSubject subject = null)
         {
+            _subject = subject;
             _httpClient = httpClient ?? new HttpClientFacade();
             _tempFile = Path.GetTempFileName();
+            subject.SetFileCreated(_tempFile);
             _codeGenerator = codeGenerator ?? new QrCodeGenerator();
         }
 
