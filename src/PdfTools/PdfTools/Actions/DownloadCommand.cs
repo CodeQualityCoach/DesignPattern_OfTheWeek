@@ -9,7 +9,7 @@ namespace PdfTools.Actions
 
         public DownloadCommand(IHttpClient httpClient = null)
         {
-            _httpClient = httpClient ?? new HttpClientFacade(); // zer impact injection pattern
+            _httpClient = httpClient ?? new HttpClientFacade(); // zero impact injection pattern
         }
         public void Execute(string[] args)
         {

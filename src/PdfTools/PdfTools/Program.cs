@@ -29,6 +29,8 @@ namespace PdfTools
                 Console.WriteLine("Args (Comma Separated): ");
                 var arg = Console.ReadLine() ?? "help";
                 args = arg.Split(',').Select(x => x.Trim()).ToArray();
+
+                // archive,http://www.lug.or.kr/files/cheat_sheet/design_pattern_cheatsheet_v1.pdf,design_pattern_cheatsheet_v1.pdf
             }
 #endif
 

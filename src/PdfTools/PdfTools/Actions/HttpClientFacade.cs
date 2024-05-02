@@ -4,7 +4,7 @@ namespace PdfTools.Actions
 {
     class HttpClientFacade : IHttpClient
     {
-        public HttpClientFacade(HttpClient client)
+        public HttpClientFacade()
         {
             
         }
