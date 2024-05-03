@@ -145,7 +145,13 @@
     <Compile Include="Actions\IHttpClient.cs" />
     <Compile Include="Actions\LoggingDecorator.cs" />
     <Compile Include="Logging\EmptyLogger.cs" />
-    <Compile Include="Observer\Class1.cs" />
+    <Compile Include="Observer\FileCreatedMessage.cs" />
+    <Compile Include="Observer\FileSizeCounter.cs" />
+    <Compile Include="Observer\HistoryLogObserver.cs" />
+    <Compile Include="Observer\IObserver.cs" />
+    <Compile Include="Observer\ISubject.cs" />
+    <Compile Include="Observer\Subject.cs" />
+    <Compile Include="Observer\WebRequestExecutedMessage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

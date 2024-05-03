@@ -6,6 +6,10 @@ using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using CastleItWillBe.Models;
 using NUnit.Framework;
+#pragma warning disable IDE0038
+#pragma warning disable S2699
+#pragma warning disable S1481
+#pragma warning disable IDE0059
 
 namespace CastleItWillBe
 {
@@ -16,8 +20,8 @@ namespace CastleItWillBe
         public void UseSingleton()
         {
             var container = new WindsorContainer();
-            container.Register(Component.For<IDemoLogger>().ImplementedBy<ConsoleLogger>().LifestyleSingleton());
-            container.Register(Component.For<IMailStrategy>().ImplementedBy<MyMailStrategy>().LifestyleSingleton());
+            container.Register(Component.For<Logger.IDemoLogger>().ImplementedBy<Logger.ConsoleLogger>().LifestyleSingleton());
+            container.Register(Component.For<MailStrategies.IMailStrategy>().ImplementedBy<MailStrategies.MyMailStrategy>().LifestyleSingleton());
             container.Register(Component.For<SendMailServices.ISendMailService>().ImplementedBy<SendMailServices.SendMailService>().LifestyleSingleton());
 
             var mailService1 = container.Resolve<SendMailServices.ISendMailService>();
@@ -28,9 +32,9 @@ namespace CastleItWillBe
         public void UseDecorator()
         {
             var container = new WindsorContainer();
-            container.Register(Component.For<IDemoLogger>().ImplementedBy<ConsoleLogger>());
-            container.Register(Component.For<IDemoLogger>().ImplementedBy<TraceLogger>().IsDefault());
-            container.Register(Component.For<IMailStrategy>().ImplementedBy<MyMailStrategy>());
+            container.Register(Component.For<Logger.IDemoLogger>().ImplementedBy<Logger.ConsoleLogger>());
+            container.Register(Component.For<Logger.IDemoLogger>().ImplementedBy<Logger.TraceLogger>().IsDefault());
+            container.Register(Component.For<MailStrategies.IMailStrategy>().ImplementedBy<MailStrategies.MyMailStrategy>());
 
             // first come first serve. The first one will be the outermost decorator
             container.Register(Component.For<SendMailServices.ISendMailService>().ImplementedBy<SendMailServices.BlockConfidentialMailsDecorator>());
@@ -45,8 +49,8 @@ namespace CastleItWillBe
         public void UseInterceptor()
         {
             var container = new WindsorContainer();
-            container.Register(Component.For<IDemoLogger>().ImplementedBy<ConsoleLogger>());
-            container.Register(Component.For<IMailStrategy>().ImplementedBy<MyMailStrategy>());
+            container.Register(Component.For<Logger.IDemoLogger>().ImplementedBy<Logger.ConsoleLogger>());
+            container.Register(Component.For<MailStrategies.IMailStrategy>().ImplementedBy<MailStrategies.MyMailStrategy>());
 
             // Register LogInterceptor. why????
             container.Register(Component.For<LogInterceptor>());
@@ -79,7 +83,7 @@ namespace CastleItWillBe
     {
         public void Intercept(IInvocation invocation)
         {
-            for (int i = 0; i < invocation.Arguments.Length; i++)
+            for (var i = 0; i < invocation.Arguments.Length; i++)
             {
                 if (invocation.Arguments[i] is string)
                     invocation.Arguments[i] = ((string)invocation.Arguments[i]).ToUpper();
@@ -91,9 +95,9 @@ namespace CastleItWillBe
 
     public class CoolLogInterceptor : IInterceptor
     {
-        private readonly IDemoLogger _logger;
+        private readonly Logger.IDemoLogger _logger;
 
-        public CoolLogInterceptor(IDemoLogger logger)
+        public CoolLogInterceptor(Logger.IDemoLogger logger)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }

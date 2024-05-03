@@ -72,7 +72,8 @@
     <Compile Include="LetsTalkAboutScopes.cs" />
     <Compile Include="Models\Circular.cs" />
     <Compile Include="Models\CircularFixed.cs" />
-    <Compile Include="Models\Class1.cs" />
+    <Compile Include="Models\Logger.cs" />
+    <Compile Include="Models\MailStrategies.cs" />
     <Compile Include="Models\SendMailServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -44,8 +44,8 @@ namespace PdfTools
 
             var action = args[0];
 
-            var subject = new FileCreatedSubject();
-            _ = new FileListObserver(subject);
+            var subject = new Subject();
+            _ = new HistoryLogObserver(subject);
             _ = new FileSizeCounter(subject);
 
             // ==============
@@ -101,17 +101,15 @@ namespace PdfTools
 
     public class PdfArchiver
     {
-        private readonly FileCreatedSubject _subject;
         private readonly IHttpClient _httpClient;
         private readonly string _tempFile;
         private readonly ICodeGenerator _codeGenerator;
 
-        public PdfArchiver(ICodeGenerator codeGenerator = null, IHttpClient httpClient = null, FileCreatedSubject subject = null)
+        public PdfArchiver(ICodeGenerator codeGenerator = null, IHttpClient httpClient = null, ISubject subject = null)
         {
-            _subject = subject;
             _httpClient = httpClient ?? new HttpClientFacade();
             _tempFile = Path.GetTempFileName();
-            subject.SetFileCreated(_tempFile);
+            subject?.Publish(new FileCreatedMessage() { FileName = _tempFile });
             _codeGenerator = codeGenerator ?? new QrCodeGenerator();
         }
 

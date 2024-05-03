@@ -7,6 +7,10 @@ using NUnit.Framework;
 using static CastleItWillBe.Models.CircularFixed;
 using static CastleItWillBe.Models.Circular;
 using Component = Castle.MicroKernel.Registration.Component;
+#pragma warning disable IDE0059
+#pragma warning disable S125
+#pragma warning disable S1481
+#pragma warning disable S2699
 
 namespace CastleItWillBe
 {
@@ -42,22 +46,19 @@ namespace CastleItWillBe
         }
 
 
-
-
-        private CircularServiceAFixed Instance;
+        private CircularServiceAFixed _instance;
         [Test]
         public void CreateCircularServiceAFixedWithoutDi()
         {
             //CircularServiceAFixed Instance;
 
             //CircularServiceAFixed Instance =
-            Instance =
+            _instance =
                 new CircularServiceAFixed(
                     new CircularServiceBFixed(
-                        new CircularServiceCFixed(new Lazy<CircularServiceAFixed>(() => Instance)
+                        new CircularServiceCFixed(new Lazy<CircularServiceAFixed>(() => _instance)
                             )));
-            Debug.WriteLine($"Lazy: {Instance.B.C.A.Value.GetType().Name}\t{Instance.B.C.A.Value.GetHashCode()}");
-
+            Debug.WriteLine($"Lazy: {_instance.B.C.A.Value.GetType().Name}\t{_instance.B.C.A.Value.GetHashCode()}");
         }
 
 

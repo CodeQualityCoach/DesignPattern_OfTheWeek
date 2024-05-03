@@ -48,7 +48,7 @@ namespace CastleItWillBe.Models
 
         public class SendMailService : ISendMailService
         {
-            public SendMailService(IMailStrategy mailStrategy, IDemoLogger logger)
+            public SendMailService(MailStrategies.IMailStrategy mailStrategy, Logger.IDemoLogger logger)
             {
                 Debug.WriteLine($"Id of {this.GetType().Name}\t{GetHashCode()}");
                 Debug.WriteLine($"\t{mailStrategy.GetType().Name}\t{mailStrategy.GetHashCode()}");

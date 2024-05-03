@@ -4,6 +4,7 @@ using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using CastleItWillBe.Models;
 using NUnit.Framework;
+#pragma warning disable S2699
 
 namespace CastleItWillBe
 {
@@ -17,13 +18,13 @@ namespace CastleItWillBe
             var container = new WindsorContainer();
 
             // adds and configures all components using WindsorInstallers from executing assembly
-            container.Register(Component.For<IDemoLogger>().ImplementedBy<ConsoleLogger>().LifestyleTransient());
-            container.Register(Component.For<IMailStrategy>().ImplementedBy<MyMailStrategy>().LifestyleTransient());
+            container.Register(Component.For<Logger.IDemoLogger>().ImplementedBy<Logger.ConsoleLogger>().LifestyleTransient());
+            container.Register(Component.For<MailStrategies.IMailStrategy>().ImplementedBy<MailStrategies.MyMailStrategy>().LifestyleTransient());
             container.Register(Component.For<SendMailServices.ISendMailService>().ImplementedBy<SendMailServices.SendMailService>().LifestyleTransient());
 
             // instantiate and configure root component and all its dependencies and their dependencies and...
-            _ = container.Resolve<IMailStrategy>();
-            _ = container.Resolve<IMailStrategy>();
+            _ = container.Resolve<MailStrategies.IMailStrategy>();
+            _ = container.Resolve<MailStrategies.IMailStrategy>();
 
             _ = container.Resolve<SendMailServices.ISendMailService>();
             _ = container.Resolve<SendMailServices.ISendMailService>();
@@ -39,15 +40,15 @@ namespace CastleItWillBe
             var container = new WindsorContainer();
 
             // adds and configures all components using WindsorInstallers from executing assembly
-            container.Register(Component.For<IDemoLogger>().ImplementedBy<ConsoleLogger>().LifestyleScoped());
-            container.Register(Component.For<IMailStrategy>().ImplementedBy<MyMailStrategy>().LifestyleTransient());
+            container.Register(Component.For<Logger.IDemoLogger>().ImplementedBy<Logger.ConsoleLogger>().LifestyleScoped());
+            container.Register(Component.For<MailStrategies.IMailStrategy>().ImplementedBy<MailStrategies.MyMailStrategy>().LifestyleTransient());
             container.Register(Component.For<SendMailServices.ISendMailService>().ImplementedBy<SendMailServices.SendMailService>().LifestyleTransient());
 
             // instantiate and configure root component and all its dependencies and their dependencies and...
             var s = container.BeginScope();
             var t = container.BeginScope();
-            _ = container.Resolve<IMailStrategy>();
-            _ = container.Resolve<IMailStrategy>();
+            _ = container.Resolve<MailStrategies.IMailStrategy>();
+            _ = container.Resolve<MailStrategies.IMailStrategy>();
             t.Dispose();
             s.Dispose();
 
@@ -68,13 +69,13 @@ namespace CastleItWillBe
             var container = new WindsorContainer();
 
             // adds and configures all components using WindsorInstallers from executing assembly
-            container.Register(Component.For<IDemoLogger>().ImplementedBy<ConsoleLogger>().LifestyleScoped());
-            container.Register(Component.For<IMailStrategy>().ImplementedBy<MyMailStrategy>().LifestyleTransient());
+            container.Register(Component.For<Logger.IDemoLogger>().ImplementedBy<Logger.ConsoleLogger>().LifestyleScoped());
+            container.Register(Component.For<MailStrategies.IMailStrategy>().ImplementedBy<MailStrategies.MyMailStrategy>().LifestyleTransient());
             container.Register(Component.For<SendMailServices.ISendMailService>().ImplementedBy<SendMailServices.SendMailService>().LifestyleTransient());
 
             // instantiate and configure root component and all its dependencies and their dependencies and...
-            _ = container.ResolveScoped<IMailStrategy>();
-            _ = container.ResolveScoped<IMailStrategy>();
+            _ = container.ResolveScoped<MailStrategies.IMailStrategy>();
+            _ = container.ResolveScoped<MailStrategies.IMailStrategy>();
 
             _ = container.ResolveScoped<SendMailServices.ISendMailService>();
             _ = container.ResolveScoped<SendMailServices.ISendMailService>();
@@ -90,13 +91,13 @@ namespace CastleItWillBe
             var container = new WindsorContainer();
 
             // adds and configures all components using WindsorInstallers from executing assembly
-            container.Register(Component.For<IDemoLogger>().ImplementedBy<ConsoleLogger>().LifestyleSingleton());
-            container.Register(Component.For<IMailStrategy>().ImplementedBy<MyMailStrategy>().LifestyleScoped());
+            container.Register(Component.For<Logger.IDemoLogger>().ImplementedBy<Logger.ConsoleLogger>().LifestyleSingleton());
+            container.Register(Component.For<MailStrategies.IMailStrategy>().ImplementedBy<MailStrategies.MyMailStrategy>().LifestyleScoped());
             container.Register(Component.For<SendMailServices.ISendMailService>().ImplementedBy<SendMailServices.SendMailService>().LifestyleTransient());
 
             // instantiate and configure root component and all its dependencies and their dependencies and...
-            _ = container.ResolveScoped<IMailStrategy>();
-            _ = container.ResolveScoped<IMailStrategy>();
+            _ = container.ResolveScoped<MailStrategies.IMailStrategy>();
+            _ = container.ResolveScoped<MailStrategies.IMailStrategy>();
 
             _ = container.ResolveScoped<SendMailServices.ISendMailService>();
             _ = container.ResolveScoped<SendMailServices.ISendMailService>();
@@ -112,13 +113,13 @@ namespace CastleItWillBe
             var container = new WindsorContainer();
 
             // adds and configures all components using WindsorInstallers from executing assembly
-            container.Register(Component.For<IDemoLogger>().ImplementedBy<ConsoleLogger>().LifestyleScoped());
-            container.Register(Component.For<IMailStrategy>().ImplementedBy<MyMailStrategy>().LifestyleSingleton());
+            container.Register(Component.For<Logger.IDemoLogger>().ImplementedBy<Logger.ConsoleLogger>().LifestyleScoped());
+            container.Register(Component.For<MailStrategies.IMailStrategy>().ImplementedBy<MailStrategies.MyMailStrategy>().LifestyleSingleton());
             container.Register(Component.For<SendMailServices.ISendMailService>().ImplementedBy<SendMailServices.SendMailService>().LifestyleTransient());
 
             // instantiate and configure root component and all its dependencies and their dependencies and...
-            _ = container.ResolveScoped<IMailStrategy>();
-            _ = container.ResolveScoped<IMailStrategy>();
+            _ = container.ResolveScoped<MailStrategies.IMailStrategy>();
+            _ = container.ResolveScoped<MailStrategies.IMailStrategy>();
 
             _ = container.ResolveScoped<SendMailServices.ISendMailService>();
             _ = container.ResolveScoped<SendMailServices.ISendMailService>();
